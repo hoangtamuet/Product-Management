@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Customer_Product.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Product.dbo.Customer_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Customer_Product">
+    <Key>
+      <PropertyRef Name="customerId" />
+      <PropertyRef Name="productId" />
+      <PropertyRef Name="quantityOrder" />
+    </Key>
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="productId" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="quantityOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="Customer_ProductStoreContainer">
+    <EntitySet Name="Customer_Product" EntityType="Self.Customer_Product" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Customer_Product].[customerId] AS [customerId], 
+    [Customer_Product].[productId] AS [productId], 
+    [Customer_Product].[quantityOrder] AS [quantityOrder]
+    FROM [dbo].[Customer_Product] AS [Customer_Product]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

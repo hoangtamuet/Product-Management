@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="utf-8" />
+	<title>Product Management</title>
+	<script src="Scripts/angular.min.js"></script>
+	<script src="Scripts/angular-ui-router.min.js"></script>
+	<!-- Load app main script -->
+	<script src="app.js"></script>
+	<!-- 3rd party libraries -->
+	<link href="Modules/Product/Product.css" rel="stylesheet" />
+	<link href="Modules/Customer/Customer.css" rel="stylesheet" />
+	<link href="Content/bootstrap.min.css" rel="stylesheet" />
+	<link href="Content/bootstrap-grid.min.css" rel="stylesheet" />
+	<link href="Content/loading-bar.min.css" rel="stylesheet" />
+	<link href="css/font-awesome.min.css" rel="stylesheet" />
+	<script src="Scripts/angular-local-storage.min.js"></script>
+	<script src="Scripts/loading-bar.min.js"></script>
+	<!-- Load Service-->
+	<script src="Service/authInterceporService.js"></script>
+	<script src="Service/authService.js"></script>
+	<script src="Service/customersService.js"></script>
+	<script src="Service/productsService.js"></script>
+	<!-- Load controller -->
+	<script src="Modules/Login/Login.js"></script>
+	<script src="Modules/Signup/Signup.js"></script>
+	<script src="Modules/Product/Product.js"></script>
+	<script src="Modules/Customer/Customer.js"></script>
+	<script src="Modules/index.js"></script>
+	<script src="Modules/Home/Home.js"></script>
+</head>
+<body ng-app="myApp" class="container">
+	<div class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Product Management</a>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" ui-sref="home" ng-hide="authentication.isAuth">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" ui-sref="products" ng-hide="authentication.isAuth">Product</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" ui-sref="customers" ng-hide="authentication.isAuth">Customer</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" ui-sref="login" ng-hide="authentication.isAuth">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" ui-sref="signup" ng-hide="authentication.isAuth">Signup</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"  ng-hide="authentication.isAuth" href="" data-ng-click="logOut()">Logout</a>
+				</li>
+			</ul>
+		</div>					
+	</div>	
+	<div>
+		<ui-view></ui-view>
+	</div>
+</body>
+</html>

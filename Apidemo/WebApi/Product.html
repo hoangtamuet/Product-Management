@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+	<div ng-app="myApp" ng-controller="productsCtrl">
+		<table>
+			<tr ng-repeat="x in myData">
+				<td>{{x.id}}</td>
+				<td>{{x.name}}</td>
+				<td>{{x.price}}</td>
+				<td>{{x.quantity}}</td>
+			</tr>
+		</table>
+		<div ng-controller="productsCtrl1">
+			<p>Id: <input type="text" ng-model="id"></p>
+			<p>Name: <input type="text" ng-model="name"></p>
+			<p>Price: <input type="text" ng-model="price"></p>
+			<p>Quantity: <input type="text" ng-model="quantity"></p>
+			<input type="submit" ng-click="postData(id, name, price, quantity)" />
+			<button ng-click="editData(id, name, price, quantity)" value="editData">edit</button>
+			<button ng-click="deleteData(id)">Delete
+			</button>
+			<p>{{ND}}</p>
+		</div>
+		
+
+	</div>
+		
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('productsCtrl', function ($scope, $http) {
+			$http.get("api/product").then(function (response) {
+				$scope.myData = response.data;
+			});
+		});
+
+		app.controller('productsCtrl1', function ($scope, $http) {
+			
+			$scope.postData = function (id, name, price, quantity) {
+				var parameter = JSON.stringify({ id: id, name: name, price: price, quantity: quantity });
+				$scope.ND = parameter;
+				$http.post("api/product/Post", parameter).then(function (response) {
+					if (response.data) $scope.msg = "Post Data Submitted Successfully!";
+
+				}, function (response) {
+
+					$scope.msg = "Service not Exists";
+
+					$scope.statusval = response.status;
+
+					$scope.statustext = response.statusText;
+
+					$scope.headers = response.headers();
+
+				});
+			}
+			$scope.editData = function (id, name, price, quantity) {
+				var parameter = JSON.stringify({ id: id, name: name, price: price, quantity: quantity });
+				$scope.ND = parameter;
+				$http.put("api/product", parameter).then(function (response) {
+					if (response.data) $scope.msg = "Edit Data Submitted Successfully!";
+
+				}, function (response) {
+
+					$scope.msg = "Service not Exists";
+
+					$scope.statusval = response.status;
+
+					$scope.statustext = response.statusText;
+
+					$scope.headers = response.headers();
+
+				});
+			}
+			$scope.deleteData = function (id) {
+				var url = "api/product/Delete/" + id;
+				$http.delete(url).then(function (response) {
+					if (response.data) $scope.msg = "Delete Data Submitted Successfully!";
+
+				}, function (response) {
+
+					$scope.msg = "Service not Exists";
+
+					$scope.statusval = response.status;
+
+					$scope.statustext = response.statusText;
+
+					$scope.headers = response.headers();
+
+				});
+			}
+		});
+
+
+
+	</script>
+
+</body>
+</html>

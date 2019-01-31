@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Customer_Product" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer_Product">
+    <Key>
+      <PropertyRef Name="customerId" />
+      <PropertyRef Name="productId" />
+      <PropertyRef Name="quantityOrder" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="quantityOrder" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ProductEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customer_Product" EntityType="Self.Customer_Product" />
+  </EntityContainer>
+</Schema>
